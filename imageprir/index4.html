@@ -8,26 +8,26 @@
 <img id="image" src="" alt="Дивись сюди">
 <script>
 const image = document.getElementById('image');
-const images = [‘001_np.jpg’, ‘002_np.jpg’, ‘003_np.jpg’, ‘004_np.jpg’, ‘005_np.jpg’, ‘006_np.jpg’, ‘007_np.jpg’, ‘008_np.jpg’, ‘009_np.jpg’, ‘010_np.jpg’,
-‘011_np.jpg’, ‘012_np.jpg’, ‘013_np.jpg’, ‘014_np.jpg’, ‘015_np.jpg’, ‘016_np.jpg’, ‘017_np.jpg’, ‘018_np.jpg’, ‘019_np.jpg’, ‘020_np.jpg’,
-‘021_np.jpg’, ‘022_np.jpg’, ‘023_np.jpg’, ‘024_np.jpg’, ‘025_np.jpg’, ‘026_np.jpg’, ‘027_np.jpg’, ‘028_np.jpg’, ‘029_np.jpg’, ‘030_np.jpg’,
-‘031_np.jpg’, ‘032_np.jpg’, ‘033_np.jpg’, ‘034_np.jpg’, ‘035_np.jpg’, ‘036_np.jpg’, ‘037_np.jpg’, ‘038_np.jpg’, ‘039_np.jpg’, ‘040_np.jpg’,
-‘041_np.jpg’, ‘042_np.jpg’, ‘043_np.jpg’, ‘044_np.jpg’, ‘045_np.jpg’, ‘046_np.jpg’, ‘047_np.jpg’, ‘048_np.jpg’, ‘049_np.jpg’, ‘050_np.jpg’,
-‘051_np.jpg’, ‘052_np.jpg’, ‘053_np.jpg’, ‘054_np.jpg’, ‘055_np.jpg’, ‘056_np.jpg’, ‘057_np.jpg’, ‘058_np.jpg’, ‘059_np.jpg’, ‘060_np.jpg’,
-‘061_np.jpg’, ‘062_np.jpg’, ‘063_np.jpg’, ‘064_np.jpg’, ‘065_np.jpg’, ‘066_np.jpg’, ‘067_np.jpg’, ‘068_np.jpg’, ‘069_np.jpg’, ‘070_np.jpg’,
-‘071_np.jpg’, ‘072_np.jpg’, ‘073_np.jpg’, ‘074_np.jpg’, ‘075_np.jpg’, ‘076_np.jpg’, ‘077_np.jpg’, ‘078_np.jpg’, ‘079_np.jpg’, ‘080_np.jpg’,
-‘081_np.jpg’, ‘082_np.jpg’, ‘083_np.jpg’, ‘084_np.jpg’, ‘085_np.jpg’, ‘086_np.jpg’, ‘087_np.jpg’, ‘088_np.jpg’, ‘089_np.jpg’, ‘090_np.jpg’,
-‘091_np.jpg’, ‘092_np.jpg’, ‘093_np.jpg’, ‘094_np.jpg’, ‘095_np.jpg’, ‘096_np.jpg’, ‘097_np.jpg’, ‘098_np.jpg’, ‘099_np.jpg’, ‘100_np.jpg’,
-‘101_np.jpg’, ‘102_np.jpg’, ‘103_np.jpg’, ‘104_np.jpg’, ‘105_np.jpg’, ‘106_np.jpg’, ‘107_np.jpg’, ‘108_np.jpg’, ‘109_np.jpg’, ‘110_np.jpg’,
-‘111_np.jpg’, ‘112_np.jpg’, ‘113_np.jpg’, ‘114_np.jpg’, ‘115_np.jpg’, ‘116_np.jpg’, ‘117_np.jpg’, ‘118_np.jpg’, ‘119_np.jpg’, ‘120_np.jpg’,
-‘121_np.jpg’, ‘122_np.jpg’, ‘123_np.jpg’, ‘124_np.jpg’, ‘125_np.jpg’, ‘126_np.jpg’, ‘127_np.jpg’, ‘128_np.jpg’, ‘129_np.jpg’, ‘130_np.jpg’,
-‘131_np.jpg’, ‘132_np.jpg’, ‘133_np.jpg’, ‘134_np.jpg’, ‘135_np.jpg’, ‘136_np.jpg’, ‘137_np.jpg’, ‘138_np.jpg’, ‘139_np.jpg’, ‘140_np.jpg’,
-‘141_np.jpg’, ‘142_np.jpg’, ‘143_np.jpg’, ‘144_np.jpg’, ‘145_np.jpg’, ‘146_np.jpg’, ‘147_np.jpg’, ‘148_np.jpg’, ‘149_np.jpg’, ‘150_np.jpg’,
-‘151_np.jpg’, ‘152_np.jpg’, ‘153_np.jpg’, ‘154_np.jpg’, ‘155_np.jpg’, ‘156_np.jpg’, ‘157_np.jpg’, ‘158_np.jpg’, ‘159_np.jpg’, ‘160_np.jpg’,
-‘161_np.jpg’, ‘162_np.jpg’, ‘163_np.jpg’, ‘164_np.jpg’, ‘165_np.jpg’, ‘166_np.jpg’, ‘167_np.jpg’, ‘168_np.jpg’, ‘169_np.jpg’, ‘170_np.jpg’, 
-‘171_np.jpg’, ‘172_np.jpg’, ‘173_np.jpg’, ‘174_np.jpg’, ‘175_np.jpg’, ‘176_np.jpg’, ‘177_np.jpg’, ‘178_np.jpg’, ‘179_np.jpg’, ‘180_np.jpg’,
-‘181_np.jpg’, ‘182_np.jpg’, ‘183_np.jpg’, ‘184_np.jpg’, ‘185_np.jpg’, ‘186_np.jpg’, ‘187_np.jpg’, ‘188_np.jpg’, ‘189_np.jpg’, ‘190_np.jpg’,
-‘191_np.jpg’, ‘192_np.jpg’, ‘193_np.jpg’, ‘194_np.jpg’, ‘195_np.jpg’, ‘196_np.jpg’, ‘197_np.jpg’, ‘198_np.jpg’, ‘199_np.jpg’, ‘200_np.jpg’
+const images = ['001_np.jpg', '002_np.jpg', '003_np.jpg', '004_np.jpg', '005_np.jpg', '006_np.jpg', '007_np.jpg', '008_np.jpg', '009_np.jpg', '010_np.jpg',
+'011_np.jpg', '012_np.jpg', '013_np.jpg', '014_np.jpg', '015_np.jpg', '016_np.jpg', '017_np.jpg', '018_np.jpg', '019_np.jpg', '020_np.jpg',
+'021_np.jpg', '022_np.jpg', '023_np.jpg', '024_np.jpg', '025_np.jpg', '026_np.jpg', '027_np.jpg', '028_np.jpg', '029_np.jpg', '030_np.jpg',
+'031_np.jpg', '032_np.jpg', '033_np.jpg', '034_np.jpg', '035_np.jpg', '036_np.jpg', '037_np.jpg', '038_np.jpg', '039_np.jpg', '040_np.jpg',
+'041_np.jpg', '042_np.jpg', '043_np.jpg', '044_np.jpg', '045_np.jpg', '046_np.jpg', '047_np.jpg', '048_np.jpg', '049_np.jpg', '050_np.jpg',
+'051_np.jpg', '052_np.jpg', '053_np.jpg', '054_np.jpg', '055_np.jpg', '056_np.jpg', '057_np.jpg', '058_np.jpg', '059_np.jpg', '060_np.jpg',
+'061_np.jpg', '062_np.jpg', '063_np.jpg', '064_np.jpg', '065_np.jpg', '066_np.jpg', '067_np.jpg', '068_np.jpg', '069_np.jpg', '070_np.jpg',
+'071_np.jpg', '072_np.jpg', '073_np.jpg', '074_np.jpg', '075_np.jpg', '076_np.jpg', '077_np.jpg', '078_np.jpg', '079_np.jpg', '080_np.jpg',
+'081_np.jpg', '082_np.jpg', '083_np.jpg', '084_np.jpg', '085_np.jpg', '086_np.jpg', '087_np.jpg', '088_np.jpg', '089_np.jpg', '090_np.jpg',
+'091_np.jpg', '092_np.jpg', '093_np.jpg', '094_np.jpg', '095_np.jpg', '096_np.jpg', '097_np.jpg', '098_np.jpg', '099_np.jpg', '100_np.jpg',
+'101_np.jpg', '102_np.jpg', '103_np.jpg', '104_np.jpg', '105_np.jpg', '106_np.jpg', '107_np.jpg', '108_np.jpg', '109_np.jpg', '110_np.jpg',
+'111_np.jpg', '112_np.jpg', '113_np.jpg', '114_np.jpg', '115_np.jpg', '116_np.jpg', '117_np.jpg', '118_np.jpg', '119_np.jpg', '120_np.jpg',
+'121_np.jpg', '122_np.jpg', '123_np.jpg', '124_np.jpg', '125_np.jpg', '126_np.jpg', '127_np.jpg', '128_np.jpg', '129_np.jpg', '130_np.jpg',
+'131_np.jpg', '132_np.jpg', '133_np.jpg', '134_np.jpg', '135_np.jpg', '136_np.jpg', '137_np.jpg', '138_np.jpg', '139_np.jpg', '140_np.jpg',
+'141_np.jpg', '142_np.jpg', '143_np.jpg', '144_np.jpg', '145_np.jpg', '146_np.jpg', '147_np.jpg', '148_np.jpg', '149_np.jpg', '150_np.jpg',
+'151_np.jpg', '152_np.jpg', '153_np.jpg', '154_np.jpg', '155_np.jpg', '156_np.jpg', '157_np.jpg', '158_np.jpg', '159_np.jpg', '160_np.jpg',
+'161_np.jpg', '162_np.jpg', '163_np.jpg', '164_np.jpg', '165_np.jpg', '166_np.jpg', '167_np.jpg', '168_np.jpg', '169_np.jpg', '170_np.jpg', 
+'171_np.jpg', '172_np.jpg', '173_np.jpg', '174_np.jpg', '175_np.jpg', '176_np.jpg', '177_np.jpg', '178_np.jpg', '179_np.jpg', '180_np.jpg',
+'181_np.jpg', '182_np.jpg', '183_np.jpg', '184_np.jpg', '185_np.jpg', '186_np.jpg', '187_np.jpg', '188_np.jpg', '189_np.jpg', '190_np.jpg',
+'191_np.jpg', '192_np.jpg', '193_np.jpg', '194_np.jpg', '195_np.jpg', '196_np.jpg', '197_np.jpg', '198_np.jpg', '199_np.jpg', '200_np.jpg'
 ];
 const randomIndex = Math.floor(Math.random() * images.length);
 image.src = images[randomIndex];
