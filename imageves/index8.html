@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Image</title>
+</head>
+<body>
+    <p> <img id="image" src="" alt="дивись сюди" onclick="changeImage()"> </p>
+    <script>
+        // Get the image element
+        const image = document.getElementById('image');
+        // Define an array of image URLs
+       const images = ['001_ss.jpg', '002_ss.jpg', '003_ss.jpg', '004_ss.jpg', '005_ss.jpg', '006_ss.jpg', '007_ss.jpg', '008_ss.jpg', '009_ss.jpg', '010_ss.jpg',
+'011_ss.jpg', '012_ss.jpg', '013_ss.jpg', '014_ss.jpg', '015_ss.jpg', '016_ss.jpg', '017_ss.jpg', '018_ss.jpg', '019_ss.jpg', '020_ss.jpg',
+'021_ss.jpg', '022_ss.jpg', '023_ss.jpg', '024_ss.jpg', '025_ss.jpg', '026_ss.jpg', '027_ss.jpg', '028_ss.jpg', '029_ss.jpg', '030_ss.jpg',
+'031_ss.jpg', '032_ss.jpg', '033_ss.jpg', '034_ss.jpg', '035_ss.jpg', '036_ss.jpg', '037_ss.jpg', '038_ss.jpg', '039_ss.jpg', '040_ss.jpg',
+'041_ss.jpg', '042_ss.jpg', '043_ss.jpg', '044_ss.jpg', '045_ss.jpg', '046_ss.jpg', '047_ss.jpg', '048_ss.jpg', '049_ss.jpg', '050_ss.jpg',
+'051_ss.jpg', '052_ss.jpg', '053_ss.jpg', '054_ss.jpg', '055_ss.jpg', '056_ss.jpg', '057_ss.jpg', '058_ss.jpg', '059_ss.jpg', '060_ss.jpg',
+'061_ss.jpg', '062_ss.jpg', '063_ss.jpg', '064_ss.jpg', '065_ss.jpg', '066_ss.jpg', '067_ss.jpg', '068_ss.jpg', '069_ss.jpg', '070_ss.jpg',
+'071_ss.jpg', '072_ss.jpg', '073_ss.jpg', '074_ss.jpg', '075_ss.jpg', '076_ss.jpg', '077_ss.jpg', '078_ss.jpg', '079_ss.jpg', '080_ss.jpg',
+'081_ss.jpg', '082_ss.jpg', '083_ss.jpg', '084_ss.jpg', '085_ss.jpg', '086_ss.jpg', '087_ss.jpg', '088_ss.jpg', '089_ss.jpg', '090_ss.jpg',
+'091_ss.jpg', '092_ss.jpg', '093_ss.jpg', '094_ss.jpg', '095_ss.jpg', '096_ss.jpg', '097_ss.jpg', '098_ss.jpg', '099_ss.jpg', '100_ss.jpg',
+'101_ss.jpg', '102_ss.jpg', '103_ss.jpg', '104_ss.jpg', '105_ss.jpg', '106_ss.jpg', '107_ss.jpg', '108_ss.jpg', '109_ss.jpg', '110_ss.jpg',
+'111_ss.jpg', '112_ss.jpg', '113_ss.jpg', '114_ss.jpg', '115_ss.jpg', '116_ss.jpg', '117_ss.jpg', '118_ss.jpg', '119_ss.jpg', '120_ss.jpg',
+'121_ss.jpg', '122_ss.jpg', '123_ss.jpg', '124_ss.jpg', '125_ss.jpg', '126_ss.jpg', '127_ss.jpg', '128_ss.jpg', '129_ss.jpg', '130_ss.jpg',
+'131_ss.jpg', '132_ss.jpg', '133_ss.jpg', '134_ss.jpg', '135_ss.jpg', '136_ss.jpg', '137_ss.jpg', '138_ss.jpg', '139_ss.jpg', '140_ss.jpg',
+'141_ss.jpg', '142_ss.jpg', '143_ss.jpg', '144_ss.jpg', '145_ss.jpg', '146_ss.jpg', '147_ss.jpg', '148_ss.jpg', '149_ss.jpg', '150_ss.jpg',
+'151_ss.jpg', '152_ss.jpg', '153_ss.jpg', '154_ss.jpg', '155_ss.jpg', '156_ss.jpg', '157_ss.jpg', '158_ss.jpg', '159_ss.jpg', '160_ss.jpg',
+'161_ss.jpg', '162_ss.jpg', '163_ss.jpg', '164_ss.jpg', '165_ss.jpg', '166_ss.jpg', '167_ss.jpg', '168_ss.jpg', '169_ss.jpg', '170_ss.jpg', 
+'171_ss.jpg', '172_ss.jpg', '173_ss.jpg', '174_ss.jpg', '175_ss.jpg', '176_ss.jpg', '177_ss.jpg', '178_ss.jpg', '179_ss.jpg', '180_ss.jpg',
+'181_ss.jpg', '182_ss.jpg', '183_ss.jpg', '184_ss.jpg', '185_ss.jpg', '186_ss.jpg', '187_ss.jpg', '188_ss.jpg', '189_ss.jpg', '190_ss.jpg',
+'191_ss.jpg', '192_ss.jpg', '193_ss.jpg', '194_ss.jpg', '195_ss.jpg', '196_ss.jpg', '197_ss.jpg', '198_ss.jpg', '199_ss.jpg', '200_ss.jpg',
+'201_ss.jpg', '202_ss.jpg', '203_ss.jpg', '204_ss.jpg', '205_ss.jpg', '206_ss.jpg', '207_ss.jpg', '208_ss.jpg', '209_ss.jpg', '210_ss.jpg',
+'211_ss.jpg', '212_ss.jpg', '213_ss.jpg', '214_ss.jpg', '215_ss.jpg', '216_ss.jpg', '217_ss.jpg', '218_ss.jpg', '219_ss.jpg', '220_ss.jpg', 
+'221_ss.jpg', '222_ss.jpg', '223_ss.jpg', '224_ss.jpg', '225_ss.jpg', '226_ss.jpg', '227_ss.jpg', '228_ss.jpg', '229_ss.jpg', '230_ss.jpg',
+'231_ss.jpg', '232_ss.jpg', '233_ss.jpg', '234_ss.jpg', '235_ss.jpg', '236_ss.jpg', '237_ss.jpg', '238_ss.jpg', '239_ss.jpg', '240_ss.jpg',
+'241_ss.jpg', '242_ss.jpg', '243_ss.jpg', '244_ss.jpg', '245_ss.jpg', '246_ss.jpg', '247_ss.jpg', '248_ss.jpg', '249_ss.jpg', '250_ss.jpg',
+'251_ss.jpg', '252_ss.jpg', '253_ss.jpg', '254_ss.jpg', '255_ss.jpg', '256_ss.jpg', '257_ss.jpg', '258_ss.jpg', '259_ss.jpg', '260_ss.jpg',
+'261_ss.jpg', '262_ss.jpg', '263_ss.jpg', '264_ss.jpg', '265_ss.jpg', '266_ss.jpg', '267_ss.jpg', '268_ss.jpg', '269_ss.jpg', '270_ss.jpg',
+'271_ss.jpg', '272_ss.jpg', '273_ss.jpg', '274_ss.jpg', '275_ss.jpg', '276_ss.jpg', '277_ss.jpg', '278_ss.jpg', '279_ss.jpg', '280_ss.jpg',
+'281_ss.jpg', '282_ss.jpg', '283_ss.jpg', '284_ss.jpg', '285_ss.jpg', '286_ss.jpg', '287_ss.jpg', '288_ss.jpg', '289_ss.jpg', '290_ss.jpg',
+'291_ss.jpg', '292_ss.jpg', '293_ss.jpg', '294_ss.jpg', '295_ss.jpg', '296_ss.jpg', '297_ss.jpg', '298_ss.jpg', '299_ss.jpg', '300_ss.jpg',
+'301_ss.jpg', '302_ss.jpg', '303_ss.jpg', '304_ss.jpg', '305_ss.jpg', '306_ss.jpg', '307_ss.jpg', '308_ss.jpg', '309_ss.jpg', '310_ss.jpg',
+'311_ss.jpg', '312_ss.jpg', '313_ss.jpg', '314_ss.jpg', '315_ss.jpg', '316_ss.jpg', '317_ss.jpg', '318_ss.jpg', '319_ss.jpg', '320_ss.jpg',
+'321_ss.jpg', '322_ss.jpg', '323_ss.jpg', '324_ss.jpg', '325_ss.jpg', '326_ss.jpg', '327_ss.jpg', '328_ss.jpg', '329_ss.jpg', '330_ss.jpg',
+'331_ss.jpg', '332_ss.jpg', '333_ss.jpg', '334_ss.jpg', '335_ss.jpg', '336_ss.jpg', '337_ss.jpg', '338_ss.jpg', '339_ss.jpg', '340_ss.jpg',
+'341_ss.jpg', '342_ss.jpg', '343_ss.jpg', '344_ss.jpg', '345_ss.jpg', '346_ss.jpg', '347_ss.jpg', '348_ss.jpg', '349_ss.jpg', '350_ss.jpg',
+'351_ss.jpg', '352_ss.jpg', '353_ss.jpg', '354_ss.jpg', '355_ss.jpg', '356_ss.jpg', '357_ss.jpg', '358_ss.jpg', '359_ss.jpg'
+];
+        // Function to change the image
+        function changeImage() {
+            // Generate a random index into the array of images
+            const randomIndex = Math.floor(Math.random() * images.length);
+            // Set the source of the image to the randomly selected image URL
+            image.src = images[randomIndex];
+        }
+        // Change the image on page load
+        changeImage();
+    </script>
+</body>
+</html>
