@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ваші результати</title>
+<style>
+   body {
+        background-image: url('005.jpg');
+        background-repeat: repeat;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+        font-family: Segoe Script, sans-serif;
+        text-align: center;        
+        }        
+        .container {
+        /*border: 2px solid red;*/
+        display: flex; flex-direction: column; 
+        justify-content: center;
+        margin: 1% auto;
+        /*width: 99vh;*/ 
+        width: 80%; /* Використовуємо відсоткове значення для адаптації ширини */
+        max-width: 95vw; /* Максимальна ширина дорівнює ширині вікна */
+        justify-content: flex-start;
+        margin-top: 0; 
+        flex-wrap: wrap; /* Заворотка на новий рядок при необхідності */         
+        }
+        h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin: 8px;
+        }
+  .results {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .result-item {
+    margin-bottom: 20px;
+  }
+  .p2{
+    text-align: center;
+    padding: 10px;
+    margin-top: 3px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="p2">
+  <p2 style="font-size: 20px; font-weight: 600; color: green;">Вітаю з завершенням метафоричного будівництва!</p2>
+  <br>
+  <p2>Всі "випадкові" і не дуже описи й характеристики в грі мають безпосереднє відношення до задуманного вами проекту: етапи будівництва символізують його різні частини, опис (прикметниками і дієсловами) характеристик й функцій предметів - це підсвідоме сприйняття вами цієї частини, а персонаж, що відповідає за неї - це той архетип, якості і можливості якого найкраще підходять для реалізації.</p2>
+  <br>
+  <p2>У внутрішньому світі ваш проект вже існує, тож подивіться тепер на свої відповіді, як на рекомендації і підказки щодо того, як найкраще організувати процес в реальності</p2>
+</div>
+  <h1>Ваші відповіді:</h1>
+  <div class="container">
+  <div class="results" id="results"></div>
+  <p>Наявні в будиночку приміщення(їх <a href="https://domschud.github.io/mandry/dim.html" style="color: blue;">призначення</a>) й те "нащо" він загалом символізують цінність, яку несе проект та напрям розвитку</p>
+  <p>Ті труднощі, які придумались вам під час будівництва, це ті "найслабші" місця, які ви інтуїтивно відчуваєте в проекті - ви вже озвучили метафоричні рішення, тепер подумайте які це можуть бути реальні дії відносно вашого задуму</p>
+  <p>Також можна намалювати будиночок, що ви уявили, і розташувати там, де ви будете часто його споглядати й надихатись.<p style="font-size: 20px; font-weight: 600; color: green;"> І, звісно, бажаю вам успіхів у реалізації!</p>
+</div>
+  <script>
+    const Etap = [
+      ['<span style="font-size: 20px; font-weight: 600; color: black;">Фундамент </span><span style="font-size: 20px; color: black;">- це основа і ядро вашого проекту</span>'],
+      ['<span style="font-size: 20px; font-weight: 600; color: black;">Стіни </span><span style="font-size: 20px; color: black;">- це ваші опори, форма й кордони</span>'],
+      ['<span style="font-size: 20px; font-weight: 600; color: black;">Вікна й Двері </span><span style="font-size: 20px; color: black;">- це взаємодія з зовнішнім світом, обмін та "звідки" заходять люди</span>'],
+      ['<span style="font-size: 20px; font-weight: 600; color: black;">Дах </span><span style="font-size: 20px; color: black;">- це ваше особисте сприйняття проекту</span>'],
+      ['<span style="font-size: 20px; font-weight: 600; color: black;">Сад/простір навколо </span><span style="font-size: 20px; color: black;">- це середовище, що потрібне проекту, де він знаходиться, гармонійне оточення</span>']
+    ];
+    const ArH = [
+  '<span style="font-size: 20px; color: black;">Бунтар</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: протистояння, виклик, заколот, революція, перевірка, руйнування, зухвалість, шок, норовливість, неправильність)</span>',
+  '<span style="font-size: 20px; color: black;">Друзяка</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: рівність, дружба, практичність, зручність, своє, традиційність, затишок, душевність, прийняття, прихильність)</span>',
+  '<span style="font-size: 20px; color: black;">Герой</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: сила, справедливість, міць, концентрація, випробування, воля, подолання, дисципліна, мужність, порятунок)</span>',
+  '<span style="font-size: 20px; color: black;">Пошукач</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: пошук, свобода, дорога, полі функціональне, пригода, ризик, відкриття, заморське, міцність, автономність )</span>',
+  '<span style="font-size: 20px; color: black;">Люблячий</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: красота, естетика, насолода, пристрасть, атмосфера, любов, чарівність, тілесність, вишуканість, привабливість)</span>',
+  '<span style="font-size: 20px; color: black;">Маг</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: зміни, алхімія, диво, невідоме, приховане, інтуїція, таємниця, трансформація, потустороннє, інакше)</span>',
+  '<span style="font-size: 20px; color: black;">Мудрець</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: істина, сенс, суть, думка, пізнання, об`єктивність, системність, логіка, теорія, аналіз)</span>',
+  '<span style="font-size: 20px; color: black;">Опікун</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: збереження, турбота, настанови, зростання, альтруїзм, розвиток, потенціал, надійність, дорослішання, підтримка)</span>',
+  '<span style="font-size: 20px; color: black;">Дитя</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: відкритість, позитив, щирість, чесність, миле, радість, невинність, довіра, безтурботність, внутрішній спокій)</span>',
+  '<span style="font-size: 20px; color: black;">Творець</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: створення, ідея, форма, новаторство, мистецтво, оригінальність, фантазія, яскравість, авторство, художність)</span>',
+  '<span style="font-size: 20px; color: black;">Правитель</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: Порядок, стабільність, розкіш, відповідальність, управління, статус, влада, система, успіх, організація)</span>',
+  '<span style="font-size: 20px; color: black;">Шут</span><span style="font-size: 15px; color: maroon;"> (прояв через такі риси: гра, веселощі, розваги, хаос, іронія, спонтанність, жарт, шоу, забава, несподіванка)</span>'
+];
+
+function loadResults() {
+  const resultsDiv = document.getElementById('results');
+  const storedThree = JSON.parse(localStorage.getItem('three')) || [];
+  const storedTwo = JSON.parse(localStorage.getItem('two')) || [];
+  const storedFour = JSON.parse(localStorage.getItem('four')) || [];
+
+  storedThree.forEach((item, index) => {
+    const etapText = Etap[index] ? Etap[index][0] : ''; // Extract the text value from Etap
+    const twoItem = storedTwo.find(two => two.index === item.index);
+    const twoValue = twoItem ? twoItem.value : '';
+    const ArHText = ArH[item.index] || ''; // Get value from ArH corresponding to item.index
+    const fourItem = storedFour.find(four => four.index === item.index); // Use .find() to get item from storedFour
+
+    const resultItem = document.createElement('div');
+    resultItem.className = 'result-item';
+    resultItem.innerHTML = `${etapText}<br>Їх функція: це "${item.value}"<br> Опис предмету ${twoValue} - відображає сприйняття цієї частини "Яка?", "Навіщо?"<br>За неї відповідає архетип: ${ArHText}<br>Підказка щодо подолання ймовірних труднощів: "${fourItem ? fourItem.value : ''}"`; // Display fourItem.value if found
+    resultsDiv.appendChild(resultItem);
+  });
+}
+    loadResults();
+  </script>
+</body>
+</html>
