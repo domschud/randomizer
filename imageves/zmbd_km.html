@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практика</title>
+<style>
+   body {
+        background-image: url('005.jpg');
+        background-repeat: repeat;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+        font-family: Segoe Script, sans-serif;
+        text-align: center;        
+        }        
+        .container {
+        /*border: 2px solid red;*/
+        display: flex; flex-direction: column; 
+        justify-content: center;
+        margin: 1% auto;
+        /*width: 99vh;*/ 
+        width: 90%; /* Використовуємо відсоткове значення для адаптації ширини */
+        max-width: 95vw; /* Максимальна ширина дорівнює ширині вікна */
+        justify-content: flex-start;
+        margin-top: 0; 
+        flex-wrap: wrap; /* Заворотка на новий рядок при необхідності */         
+        }
+        h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin: 8px;
+        }
+  .rost-images {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }  
+  .rost-images .image-container {
+    margin: 10px;
+    position: relative;
+  }  
+  .rost-images img {
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+    max-width: 100%; /* Дозволяє масштабуватися зображенням */
+  height: auto; /* Зберігає співвідношення сторін */
+  flex: 1 1 100px; /* Дозволяє зображенням адаптуватися під ширину контейнера */
+  }
+  .rost-images img:hover {
+		  transform: scale(180%); /* Збільшуємо масштаб */
+  }
+  .selected {
+    border-color: green !important;
+  }
+  .content {
+    margin-top: 20px;
+  }
+  .caption {
+    font-size: 14px;
+    color: gray;
+  }
+  .input-group {
+    margin-bottom: 10px;
+  }
+
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .input-group input {
+    width: 50%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+   /* Модальне вікно стилі */
+   .modal {
+      display: none; /* Сховати за замовчуванням */
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4); /* Чорний фон з прозорістю */
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .sup {
+      cursor: pointer;
+      width: 75px;
+    }
+    button {
+        margin: 5px auto; /* Вирівнювання кнопки по центру горизонтально */
+        padding: 7px;
+        padding-left: 9px;
+        padding-right: 9px;
+        border-radius: 10px;
+        background-color: aliceblue;
+        max-height: 25vh;
+        }
+</style>
+</head>
+  <body>
+    <h1>Будівництво</h1>
+    <div class="container">
+    <div class="rost-images" id="rost-images"></div>
+    <div class="content" id="content"></div>
+    
+    <div class="input-group">
+      <label for="input-field">Впиши його ключову функцію сюди:</label>
+      <input type="text" id="input-field" placeholder="ключова функція">
+    </div>
+    
+    <div class="input-group">
+      <div class="content" id="content2"></div>
+      <label for="input-field2">Сформулюй реченням це рішення і впиши його сюди:</label>
+      <input type="text" id="input-field2" placeholder="рішення">
+    </div>
+    
+    <button id="next-button" onclick="handleNext()">Далі →</button>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img id="modal-image" src="" alt="Random Image" width="300">
+    </div>
+  </div>
+</div>
+
+<script>
+  const Rost = ["01_rs.jpg", "02_rs.jpg", "03_rs.jpg", "04_rs.jpg", "05_rs.jpg", "06_rs.jpg", "07_rs.jpg", "08_rs.jpg", "09_rs.jpg", "10_rs.jpg", "11_rs.jpg", "12_rs.jpg"];
+const Bud = [
+  ['<span style="font-size: 20px; color: black;">Починаємо! Уяви абстрактну ділянку-простір, де скоро буде будиночок </span><span style="font-size: 15px; color: maroon;">(як саме він виглядатиме, поки що, не важливо)</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;"> Пора закладати Фундамент.</span>', '<span style="font-size: 10px; color: black;"></span>','<span style="font-size: 20px; color: black;">Вибери хто з 5 членів команди здається тобі найбільш підходящим для закладання фундаменту?</span><span style="font-size: 15px; color: maroon;">(клікнувши на зображення)</span>', '<span style="font-size: 10px; color: black;"></span>','<span style="font-size: 20px; color: black;">Візьми його предмет в руки, покрути й опиши прикметниками</span><span style="font-size: 15px; color: maroon;">(можна вголос, але краще рукою десь собі на листочку)</span>', '<span style="font-size: 20px; color: black;">- Який він і навіщо потрібен? Як використовується й чим цьому предмету можна нашкодити, зіпсувати його?</span>', '<span style="font-size: 20px; color: black;">Тепер сформулюй словосполучення – найголовніше, його ключову функцію</span>'],
+  ['<span style="font-size: 20px; color: black;">Фундамент закладений. Йдемо далі…</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;"> Наступний етап – Стіни</span>', '<span style="font-size: 10px; color: black;"></span>','<span style="font-size: 20px; color: black;">Подивись на ті 4 персонажа які залишилися, хто з них відповідатиме за цей етап?</span><span style="font-size: 15px; color: maroon;">(клікни на його зображення)</span>', '<span style="font-size: 10px; color: black;"></span>','<span style="font-size: 20px; color: black;">Візьми його предмет в руки й опиши з усіх сторін</span><span style="font-size: 15px; color: maroon;">(можна вголос, але краще рукою десь собі на листочку)</span>', '<span style="font-size: 20px; color: black;">- Для чого він потрібен? Яка його ведуча функція? Хто нею користуватиметься, та що може зіпсувати цей предмет? </span>', '<span style="font-size: 20px; color: black;">Сформулюй його ведучу функцію словосполученням</span>'],
+  ['<span style="font-size: 20px; color: black;">Наступний етап – це Вікна й Двері.</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;"> Скільки дверей буде в твоєму будиночку? А вікон? </span>', '<span style="font-size: 10px; color: black;"></span>','<span style="font-size: 20px; color: black;">Вибери з 3-х учасників, хто буде займатися цим питанням?</span><span style="font-size: 15px; color: maroon;">(клікнувши на зображення)</span>', '<span style="font-size: 10px; color: black;"></span>','<span style="font-size: 20px; color: black;">Візьми його предмет в руки, покрути й опиши прикметниками</span><span style="font-size: 15px; color: maroon;">(можна вголос, але краще рукою десь собі на листочку)</span>', '<span style="font-size: 20px; color: black;">- Який він і навіщо потрібен? Як використовується й чим цьому предмету можна нашкодити, зіпсувати його?</span>', '<span style="font-size: 20px; color: black;">Тепер сформулюй словосполучення – найголовніше, його ключову функцію</span>'],
+  ['<span style="font-size: 20px; color: black;">Попереду досить значимий етап:</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;"> формування Даху й простору Горища</span>', '<span style="font-size: 10px; color: black;"></span>','<span style="font-size: 20px; color: black;">Хто з 2-х наявних робітників відповідатиме за них?</span><span style="font-size: 15px; color: maroon;">(клікнувши на зображення)</span>', '<span style="font-size: 10px; color: black;"></span>','<span style="font-size: 20px; color: black;">Візьми відповідний предмет в руки й добряче роздивись його</span><span style="font-size: 15px; color: maroon;">(можна вголос, але краще рукою десь собі на листочку)</span>', '<span style="font-size: 20px; color: black;">- Які в тебе винакають асоціації та що за функції цього предмету. Хто й навіщо й чим може зашкодити йому?</span>', '<span style="font-size: 20px; color: black;">Опиши словосполученням найголовніше – ведучу характеристику(функцію)</span>'],
+  ['<span style="font-size: 20px; color: black;">Останній, але не менш важливий момент:</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;"> цей учасник команди відповідає за простір навколо твого заміського будиночка:</span>', '<span style="font-size: 10px; color: black;"></span>','<span style="font-size: 20px; color: black;">– що його оточує, як він вписаний у ландшафт</span><span style="font-size: 15px; color: maroon;">(не забудь клікнути на зображення)</span>', '<span style="font-size: 10px; color: black;"></span>','<span style="font-size: 20px; color: black;">Візьми останній предмет, опиши</span><span style="font-size: 15px; color: maroon;">(можна вголос, але краще рукою десь собі на листочку)</span>', '<span style="font-size: 20px; color: black;">- якій він, які у нього функції, де він використовується, що його може поламати й пошкодити?</span>', '<span style="font-size: 20px; color: black;">Й запиши словосполученням його ведучу функцію</span>'],
+];
+const Bud2 = [
+  ['<span style="font-size: 20px; color: black;">Тепер уяви, ти йдеш навколо своєї ділянки й зустрічаєш його - цього персонажа. В твоєму уявному світі він може виглядати не так як на картинці. Але в тебе немає сумнівів, що це таки він. Роздивись його.</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;">Коли ти підійшла він повідомляє тобі, що фундаментом виникла деяка проблема...</span>', '<span style="font-size: 15px; color: maroon;">(витягни метафоричну підказку, щоб дізнатися яка саме)</span><img src="knp_ts.png" class="sup" alt="тисни тут">', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;"> Як би ти її вирішила?</span>'],
+  ['<span style="font-size: 20px; color: black;">Ти знову стоїш на своїй ділянці, і бачиш, що фундамент закладений й почалось активне зведення стін.</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;">Тебе кличе учасник твоєї команди</span><span style="font-size: 15px; color: maroon;"> (він теж може дещо відрізнятися від картинки)</span><span style="font-size: 20px; color: black;"> й питає щодо труднощів, які виникли.</span>', '<span style="font-size: 15px; color: maroon;">(витягни метафоричну підказку, щоб дізнатися яка саме)</span><img src="knp_ts.png" class="sup" alt="тисни тут">', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;"> Як би ти могла допомогти її вирішити?</span>'],
+  ['<span style="font-size: 20px; color: black;">Ти заглядаєш у віконця, заходиш у двері і стикаєшся з 3-м членом команди, роздивись його</span><span style="font-size: 15px; color: maroon;"> (чим він схожий, а чим відрізняється від зображення?)</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;">в цей час він таки визнає, що є деяки перешкоди... </span>', '<span style="font-size: 15px; color: maroon;">(витягни метафоричну підказку, щоб дізнатися які саме)</span><img src="knp_ts.png" class="sup" alt="тисни тут">', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;"> Як ти можеш їх вирішити?</span>'],
+  ['<span style="font-size: 20px; color: black;">Отже зараз ти стоїш біля будиночка, спостерігаєш як дах займає своє місце, також можеш подумки перенестися на горище.</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;">Тут ти дізнаєшся, що виникли деякі незаплановані питання, кличеш відповідального(до речі, як він виглядає в твоїй уяві?), а він розказує, що… </span>', '<span style="font-size: 15px; color: maroon;">(витягни метафоричну підказку, щоб дізнатися яка саме)</span><img src="knp_ts.png" class="sup" alt="тисни тут">', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;"> Як ти будеш її вирішувати? </span>'],
+  ['<span style="font-size: 20px; color: black;">Тепер ти роздивляєшся простір навколо будиночку – що могло піти не так? </span>', '<span style="font-size: 15px; color: maroon;">(витягни метафоричну підказку, щоб дізнатися яка саме)</span><img src="knp_ts.png" class="sup" alt="тисни тут">', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;">Ти звертаєшся до 5-го учасника команди – зверни увагу, як він виглядає й як себе поводить?</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;"> Як ви вирішите ці труднощі?</span>', '<span style="font-size: 10px; color: black;"></span>', '<span style="font-size: 20px; color: black;">Тепер спробуй уявити побудований будиночок – настільки детально наскільки виходить – який він вийшов, які приміщення будуть всередині, для чого, яких вражень та заходів там будуть збиратися люди? Хто вони? Навіщо він потрібен і що приносить хозяїну й гостям? Що в ньому має бути обов’язково – без чого він втрачає сенс? </span><span style="font-size: 15px; color: maroon;">(мова йде саме про уявний дім)</span>', '<span style="font-size: 20px; color: black;"> Згадай до якого рішення ви дійшли, щодо впорядкування простору навколо будиночка?</span>']
+]
+const Pidkaz = ['001_ss.jpg', '002_ss.jpg', '003_ss.jpg', '004_ss.jpg', '005_ss.jpg', '006_ss.jpg', '007_ss.jpg', '008_ss.jpg', '009_ss.jpg', '010_ss.jpg',
+'011_ss.jpg', '012_ss.jpg', '013_ss.jpg', '014_ss.jpg', '015_ss.jpg', '016_ss.jpg', '017_ss.jpg', '018_ss.jpg', '019_ss.jpg', '020_ss.jpg',
+'021_ss.jpg', '022_ss.jpg', '023_ss.jpg', '024_ss.jpg', '025_ss.jpg', '026_ss.jpg', '027_ss.jpg', '028_ss.jpg', '029_ss.jpg', '030_ss.jpg',
+'031_ss.jpg', '032_ss.jpg', '033_ss.jpg', '034_ss.jpg', '035_ss.jpg', '036_ss.jpg', '037_ss.jpg', '038_ss.jpg', '039_ss.jpg', '040_ss.jpg',
+'041_ss.jpg', '042_ss.jpg', '043_ss.jpg', '044_ss.jpg', '045_ss.jpg', '046_ss.jpg', '047_ss.jpg', '048_ss.jpg', '049_ss.jpg', '050_ss.jpg',
+'051_ss.jpg', '052_ss.jpg', '053_ss.jpg', '054_ss.jpg', '055_ss.jpg', '056_ss.jpg', '057_ss.jpg', '058_ss.jpg', '059_ss.jpg', '060_ss.jpg',
+'061_ss.jpg', '062_ss.jpg', '063_ss.jpg', '064_ss.jpg', '065_ss.jpg', '066_ss.jpg', '067_ss.jpg', '068_ss.jpg', '069_ss.jpg', '070_ss.jpg',
+'071_ss.jpg', '072_ss.jpg', '073_ss.jpg', '074_ss.jpg', '075_ss.jpg', '076_ss.jpg', '077_ss.jpg', '078_ss.jpg', '079_ss.jpg', '080_ss.jpg',
+'081_ss.jpg', '082_ss.jpg', '083_ss.jpg', '084_ss.jpg', '085_ss.jpg', '086_ss.jpg', '087_ss.jpg', '088_ss.jpg', '089_ss.jpg', '090_ss.jpg',
+'091_ss.jpg', '092_ss.jpg', '093_ss.jpg', '094_ss.jpg', '095_ss.jpg', '096_ss.jpg', '097_ss.jpg', '098_ss.jpg', '099_ss.jpg', '100_ss.jpg',
+'101_ss.jpg', '102_ss.jpg', '103_ss.jpg', '104_ss.jpg', '105_ss.jpg', '106_ss.jpg', '107_ss.jpg', '108_ss.jpg', '109_ss.jpg', '110_ss.jpg',
+'111_ss.jpg', '112_ss.jpg', '113_ss.jpg', '114_ss.jpg', '115_ss.jpg', '116_ss.jpg', '117_ss.jpg', '118_ss.jpg', '119_ss.jpg', '120_ss.jpg',
+'121_ss.jpg', '122_ss.jpg', '123_ss.jpg', '124_ss.jpg', '125_ss.jpg', '126_ss.jpg', '127_ss.jpg', '128_ss.jpg', '129_ss.jpg', '130_ss.jpg',
+'131_ss.jpg', '132_ss.jpg', '133_ss.jpg', '134_ss.jpg', '135_ss.jpg', '136_ss.jpg', '137_ss.jpg', '138_ss.jpg', '139_ss.jpg', '140_ss.jpg',
+'141_ss.jpg', '142_ss.jpg', '143_ss.jpg', '144_ss.jpg', '145_ss.jpg', '146_ss.jpg', '147_ss.jpg', '148_ss.jpg', '149_ss.jpg', '150_ss.jpg',
+'151_ss.jpg', '152_ss.jpg', '153_ss.jpg', '154_ss.jpg', '155_ss.jpg', '156_ss.jpg', '157_ss.jpg', '158_ss.jpg', '159_ss.jpg', '160_ss.jpg',
+'161_ss.jpg', '162_ss.jpg', '163_ss.jpg', '164_ss.jpg', '165_ss.jpg', '166_ss.jpg', '167_ss.jpg', '168_ss.jpg', '169_ss.jpg', '170_ss.jpg', 
+'171_ss.jpg', '172_ss.jpg', '173_ss.jpg', '174_ss.jpg', '175_ss.jpg', '176_ss.jpg', '177_ss.jpg', '178_ss.jpg', '179_ss.jpg', '180_ss.jpg',
+'181_ss.jpg', '182_ss.jpg', '183_ss.jpg', '184_ss.jpg', '185_ss.jpg', '186_ss.jpg', '187_ss.jpg', '188_ss.jpg', '189_ss.jpg', '190_ss.jpg',
+'191_ss.jpg', '192_ss.jpg', '193_ss.jpg', '194_ss.jpg', '195_ss.jpg', '196_ss.jpg', '197_ss.jpg', '198_ss.jpg', '199_ss.jpg', '200_ss.jpg',
+'201_ss.jpg', '202_ss.jpg', '203_ss.jpg', '204_ss.jpg', '205_ss.jpg', '206_ss.jpg', '207_ss.jpg', '208_ss.jpg', '209_ss.jpg', '210_ss.jpg',
+'211_ss.jpg', '212_ss.jpg', '213_ss.jpg', '214_ss.jpg', '215_ss.jpg', '216_ss.jpg', '217_ss.jpg', '218_ss.jpg', '219_ss.jpg', '220_ss.jpg', 
+'221_ss.jpg', '222_ss.jpg', '223_ss.jpg', '224_ss.jpg', '225_ss.jpg', '226_ss.jpg', '227_ss.jpg', '228_ss.jpg', '229_ss.jpg', '230_ss.jpg',
+'231_ss.jpg', '232_ss.jpg', '233_ss.jpg', '234_ss.jpg', '235_ss.jpg', '236_ss.jpg', '237_ss.jpg', '238_ss.jpg', '239_ss.jpg', '240_ss.jpg',
+'241_ss.jpg', '242_ss.jpg', '243_ss.jpg', '244_ss.jpg', '245_ss.jpg', '246_ss.jpg', '247_ss.jpg', '248_ss.jpg', '249_ss.jpg', '250_ss.jpg',
+'251_ss.jpg', '252_ss.jpg', '253_ss.jpg', '254_ss.jpg', '255_ss.jpg', '256_ss.jpg', '257_ss.jpg', '258_ss.jpg', '259_ss.jpg', '260_ss.jpg',
+'261_ss.jpg', '262_ss.jpg', '263_ss.jpg', '264_ss.jpg', '265_ss.jpg', '266_ss.jpg', '267_ss.jpg', '268_ss.jpg', '269_ss.jpg', '270_ss.jpg',
+'271_ss.jpg', '272_ss.jpg', '273_ss.jpg', '274_ss.jpg', '275_ss.jpg', '276_ss.jpg', '277_ss.jpg', '278_ss.jpg', '279_ss.jpg', '280_ss.jpg',
+'281_ss.jpg', '282_ss.jpg', '283_ss.jpg', '284_ss.jpg', '285_ss.jpg', '286_ss.jpg', '287_ss.jpg', '288_ss.jpg', '289_ss.jpg', '290_ss.jpg',
+'291_ss.jpg', '292_ss.jpg', '293_ss.jpg', '294_ss.jpg', '295_ss.jpg', '296_ss.jpg', '297_ss.jpg', '298_ss.jpg', '299_ss.jpg', '300_ss.jpg',
+'301_ss.jpg', '302_ss.jpg', '303_ss.jpg', '304_ss.jpg', '305_ss.jpg', '306_ss.jpg', '307_ss.jpg', '308_ss.jpg', '309_ss.jpg', '310_ss.jpg',
+'311_ss.jpg', '312_ss.jpg', '313_ss.jpg', '314_ss.jpg', '315_ss.jpg', '316_ss.jpg', '317_ss.jpg', '318_ss.jpg', '319_ss.jpg', '320_ss.jpg',
+'321_ss.jpg', '322_ss.jpg', '323_ss.jpg', '324_ss.jpg', '325_ss.jpg', '326_ss.jpg', '327_ss.jpg', '328_ss.jpg', '329_ss.jpg', '330_ss.jpg',
+'331_ss.jpg', '332_ss.jpg', '333_ss.jpg', '334_ss.jpg', '335_ss.jpg', '336_ss.jpg', '337_ss.jpg', '338_ss.jpg', '339_ss.jpg', '340_ss.jpg',
+'341_ss.jpg', '342_ss.jpg', '343_ss.jpg', '344_ss.jpg', '345_ss.jpg', '346_ss.jpg', '347_ss.jpg', '348_ss.jpg', '349_ss.jpg', '350_ss.jpg',
+'351_ss.jpg', '352_ss.jpg', '353_ss.jpg', '354_ss.jpg', '355_ss.jpg', '356_ss.jpg', '357_ss.jpg', '358_ss.jpg', '359_ss.jpg'
+];
+
+
+let currentTextIndex = 0; // Змінна для відслідковування поточного індексу тексту
+const selectedImageIndex = new Set(); // Множина для зберігання індексів вибраних зображень
+
+// Функція для завантаження зображень з локального сховища та відображення їх на сторінці
+function loadImages() {
+  const storedIndices = JSON.parse(localStorage.getItem('one')) || [];
+  const storedTwo = JSON.parse(localStorage.getItem('two')) || [];
+  const rostImagesDiv = document.getElementById('rost-images');
+  rostImagesDiv.innerHTML = ''; // Очищення попередніх зображень
+
+  storedIndices.forEach(index => {
+    const container = document.createElement('div');
+    container.className = 'image-container';
+
+    const img = document.createElement('img');
+    img.src = Rost[index];
+    img.width = 150;
+    img.dataset.index = index;
+    img.onclick = () => toggleSelection(img);
+
+    const caption = document.createElement('div');
+    caption.className = 'caption';
+    const twoEntry = storedTwo.find(entry => entry.index == index);
+    caption.innerText = twoEntry ? twoEntry.value : '';
+
+    container.appendChild(img);
+    container.appendChild(caption);
+    rostImagesDiv.appendChild(container);
+  });
+}
+
+// Функція для завантаження тексту з масивів Bud та Bud2
+function loadText() {
+  const contentDiv = document.getElementById('content');
+  contentDiv.innerHTML = Bud[currentTextIndex].join('<br>');
+  const contentDiv2 = document.getElementById('content2');
+  contentDiv2.innerHTML = Bud2[currentTextIndex].join('<br>');
+  addModalEventListeners(); // Додаємо події для модального вікна
+}
+
+// Функція для вибору або зняття вибору зображення
+function toggleSelection(img) {
+  const index = img.dataset.index;
+  if (selectedImageIndex.has(index)) {
+    selectedImageIndex.delete(index);
+    img.classList.remove('selected');
+  } else {
+    selectedImageIndex.clear(); // Забезпечення вибору лише одного зображення
+    selectedImageIndex.add(index);
+    document.querySelectorAll('.rost-images img').forEach(img => img.classList.remove('selected'));
+    img.classList.add('selected');
+  }
+}
+
+// Функція для обробки натискання кнопки "Далі"
+function handleNext() {
+  if (selectedImageIndex.size !== 1) {
+    alert('Виберіть 1 зображення');
+    return;
+  }
+
+  const selectedIdx = Array.from(selectedImageIndex)[0];
+  const inputValue = document.getElementById('input-field').value;
+  const inputValue2 = document.getElementById('input-field2').value;
+  const storedIndices = JSON.parse(localStorage.getItem('one')) || [];
+  const updatedIndices = storedIndices.filter(index => index != selectedIdx);
+
+  // Збереження значень у локальне сховище
+  let storedData = JSON.parse(localStorage.getItem('three')) || [];
+  let storedDataFour = JSON.parse(localStorage.getItem('four')) || [];
+  storedData.push({ index: selectedIdx, value: inputValue });
+  storedDataFour.push({ index: selectedIdx, value: inputValue2 });
+  localStorage.setItem('three', JSON.stringify(storedData));
+  localStorage.setItem('four', JSON.stringify(storedDataFour));
+  localStorage.setItem('one', JSON.stringify(updatedIndices));
+
+  // Скидання полів введення
+  document.getElementById('input-field').value = '';
+  document.getElementById('input-field2').value = '';
+
+  selectedImageIndex.clear(); // Очистити вибір після видалення
+
+  // Перевірка, чи є ще тексти для відображення
+  if (updatedIndices.length === 0 || currentTextIndex >= Bud.length - 1) {
+    window.location.href = 'zmbd_fin.html'; // Зміна сторінки на фінальну
+  } else {
+    currentTextIndex++;
+    loadImages();
+    loadText();
+  }
+}
+
+// Функція для додавання подій модального вікна до зображень
+function addModalEventListeners() {
+  const images = document.querySelectorAll('#content2 img[alt="тисни тут"]');
+  const showModal = () => {
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modal-image');
+    modalImage.src = getRandomImage();
+    modal.style.display = 'block';
+  };
+
+  images.forEach(img => {
+    img.onclick = showModal;
+  });
+}
+
+// Функція для отримання випадкового зображення з масиву Pidkaz
+function getRandomImage() {
+  const randomIndex = Math.floor(Math.random() * Pidkaz.length);
+  return Pidkaz[randomIndex];
+}
+
+// Функція для завантаження початкового контенту
+function loadContent() {
+  loadImages();
+  loadText();
+}
+
+// Закриття модального вікна при натисканні на хрестик
+document.querySelector('.close').onclick = function() {
+  document.getElementById('modal').style.display = 'none';
+}
+
+// Закриття модального вікна при натисканні поза його межами
+window.onclick = function(event) {
+  const modal = document.getElementById('modal');
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+}
+
+// Початкове завантаження зображень та текстів
+loadContent();
+</script>
+</body>
+</html>
