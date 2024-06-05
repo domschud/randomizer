@@ -19,7 +19,6 @@
         display: flex; flex-direction: column; 
         justify-content: center;
         margin: 1% auto;
-        /*width: 99vh;*/ 
         width: 90%; /* Використовуємо відсоткове значення для адаптації ширини */
         max-width: 95vw; /* Максимальна ширина дорівнює ширині вікна */
         justify-content: flex-start;
@@ -49,7 +48,7 @@
   flex: 1 1 100px; /* Дозволяє зображенням адаптуватися під ширину контейнера */
   }
   .rost-images img:hover {
-		  transform: scale(180%); /* Збільшуємо масштаб */
+ transform: scale(180%); /* Збільшуємо масштаб */
   }
   .selected {
     border-color: green !important;
@@ -147,7 +146,6 @@
     </div>
   </div>
 </div>
-
 <script>
   const Rost = ["01_rs.jpg", "02_rs.jpg", "03_rs.jpg", "04_rs.jpg", "05_rs.jpg", "06_rs.jpg", "07_rs.jpg", "08_rs.jpg", "09_rs.jpg", "10_rs.jpg", "11_rs.jpg", "12_rs.jpg"];
 const Bud = [
@@ -201,8 +199,6 @@ const Pidkaz = ['001_ss.jpg', '002_ss.jpg', '003_ss.jpg', '004_ss.jpg', '005_ss.
 '341_ss.jpg', '342_ss.jpg', '343_ss.jpg', '344_ss.jpg', '345_ss.jpg', '346_ss.jpg', '347_ss.jpg', '348_ss.jpg', '349_ss.jpg', '350_ss.jpg',
 '351_ss.jpg', '352_ss.jpg', '353_ss.jpg', '354_ss.jpg', '355_ss.jpg', '356_ss.jpg', '357_ss.jpg', '358_ss.jpg', '359_ss.jpg'
 ];
-
-
 let currentTextIndex = 0; // Змінна для відслідковування поточного індексу тексту
 const selectedImageIndex = new Set(); // Множина для зберігання індексів вибраних зображень
 
