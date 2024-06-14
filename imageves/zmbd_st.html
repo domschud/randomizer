@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вибери собі команду</title>
+<style>
+  body {
+        background-image: url('005.jpg');
+        background-repeat: repeat;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+        font-family: Segoe Script, sans-serif;
+        text-align: center;        
+        }        
+        .container {
+        /*border: 2px solid red;*/
+        display: flex; flex-direction: row; 
+        justify-content: center;
+        margin: 1% auto;
+        width: 90%; /* Використовуємо відсоткове значення для адаптації ширини */
+        max-width: 90vw; /* Максимальна ширина дорівнює ширині вікна */
+        min-width: 50vh;
+        justify-content: flex-start;
+        margin-top: 0; 
+        flex-wrap: wrap; /* Заворотка на новий рядок при необхідності */         
+        }
+        h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin: 8px;
+        }
+        p {
+          margin: 9px;
+        }    
+        .arh img {
+        margin: 5px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: border-color 0.3s;
+        }
+        .arh img:hover {
+	transform: scale(180%); /* Збільшуємо масштаб */
+        }
+        .selected {
+         border-color: green !important;
+        }
+        .rost-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        }
+        .rost-item {
+         margin: 10px;
+         text-align: center;
+        }
+        .rost-item input {
+         display: block;
+         margin: 5px auto;
+	max-width: 130px;
+        }
+        button {
+        margin: 5px auto; /* Вирівнювання кнопки по центру горизонтально */
+        padding: 7px;
+        padding-left: 9px;
+        padding-right: 9px;
+        border-radius: 10px;
+        background-color: aliceblue;
+        max-height: 25vh;
+        }
+</style>
+</head>
+<body>
+<div id="stage1">
+  <h1>Асоціативна гра "Заміський будиночок"</h1>
+  <p1>(Дослідження проекту через метафору заміського будиночку)</p1>
+  <p>Отже, згадайте про проект, який ви б хотіли втілити в життя (чи вже почали).</p>
+  <p>Можна навіть уявити, що ви відчуватимете коли реалізуєте його ;) Уявили? Тоді,</p>
+  <p>час розслабитись і... збудувати Заміський Будиночок. Перше, що вам треба зробити це набрати</p>
+  <p>собі команду з 5 помічників: тих, хто зараз здається вам найбільш підходящими на цю роль.</p>
+  <p>Кожен з них буде відповідати за свою частину робота, але зараз ви не розподіляєте обов’язки,</p>
+  <p>лише вибираєте учасників, неначе розглядаєте їх резюме (Тицніть на обраного персонажа)</p>
+  <div class="container">
+  <div class="arh" id="arh"></div>
+  <p>Обрали? Тепер поройдіться по квартирі/кімнаті(чи в радіусі метр навколо себе) й зберіть 5 різних предметів, які можете взяти в руку. Критерій вибору - вони вам просто сподобалися й привернули до себе вашу увагу (можна позаглядати в ящики та шафки). Як зберете тисніть "далі..."</p>
+  <button onclick="handleNext()">Далі →</button>
+</div>
+</div>
+<div id="stage2" style="display: none;">
+  <h1>Знайомство з командою</h1>
+  <p>Розподіліть ці 5 предметів між персонажами - кому який більше підходить.</p>
+  <div class="container">
+  <div class="rost-container" id="rost"></div>
+  <br>
+  <button onclick="handleAssign()">Далі →</button>
+</div>
+</div>
+</div>
+<script>
+  const Port = ["01_pr.png", "02_pr.png", "03_pr.png", "04_pr.png", "05_pr.png", "06_pr.png", "07_pr.png", "08_pr.png", "09_pr.png", "10_pr.png", "11_pr.png", "12_pr.png"];
+  const Rost = ["01_rs.jpg", "02_rs.jpg", "03_rs.jpg", "04_rs.jpg", "05_rs.jpg", "06_rs.jpg", "07_rs.jpg", "08_rs.jpg", "09_rs.jpg", "10_rs.jpg", "11_rs.jpg", "12_rs.jpg"];
+  const selectedImages = new Set();
+  const arhDiv = document.getElementById('arh');
+  Port.forEach((src, index) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.width = 100;
+    img.dataset.index = index;
+    img.onclick = () => toggleSelection(img);
+    arhDiv.appendChild(img);
+  });
+
+  function toggleSelection(img) {
+    const index = img.dataset.index;
+    if (selectedImages.has(index)) {
+      selectedImages.delete(index);
+      img.classList.remove('selected');
+    } else {
+      selectedImages.add(index);
+      img.classList.add('selected');
+    }
+  }
+
+  function handleNext() {
+    if (selectedImages.size !== 5) {
+      alert('Виберіть 5 зображень');
+      return;
+    }
+
+    const selectedIndices = Array.from(selectedImages);
+    localStorage.setItem('one', JSON.stringify(selectedIndices));
+
+    document.getElementById('stage1').style.display = 'none';
+    document.getElementById('stage2').style.display = 'block';
+
+    const rostDiv = document.getElementById('rost');
+    selectedIndices.forEach(index => {
+      const div = document.createElement('div');
+      div.className = 'rost-item';
+
+      const img = document.createElement('img');
+      img.src = Rost[index];
+      img.width = 130;
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Введіть предмет';
+      input.dataset.index = index;
+
+      div.appendChild(img);
+      div.appendChild(input);
+      rostDiv.appendChild(div);
+    });
+  }
+
+  function handleAssign() {
+    const inputs = document.querySelectorAll('.rost-item input');
+    const assignedValues = [];
+
+    inputs.forEach(input => {
+      const index = input.dataset.index;
+      const value = input.value;
+      assignedValues.push({ index, value });
+    });
+
+    localStorage.removeItem('two');
+    localStorage.removeItem('three');
+    localStorage.setItem('two', JSON.stringify(assignedValues));
+
+    // Redirect to the next page
+    window.location.href = 'zmbd_km.html';
+  }
+
+  // Function to clear localStorage before loading the page
+  function clearLocalStorage() {
+    localStorage.removeItem('one');
+    localStorage.removeItem('two');
+    localStorage.removeItem('three');
+    localStorage.removeItem('four');
+  }
+
+  // Call clearLocalStorage() when the page loads
+  clearLocalStorage();
+</script>
+</body>
+</html>
